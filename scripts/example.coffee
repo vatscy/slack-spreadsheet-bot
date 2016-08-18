@@ -39,7 +39,7 @@ module.exports = (robot) ->
       eva = ""
       if /^(\+|＋|○)/i.test row
         eva = "○"
-      else if /^(\-|−|☓)/i.test row
+      else if /^(\-|−|ー|☓)/i.test row
         eva = "☓"
       else
         continue
