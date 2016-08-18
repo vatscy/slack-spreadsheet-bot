@@ -58,7 +58,7 @@ module.exports = (robot) ->
         request.post options, (err, response, body) ->
           res.send "完了"
 
-    res.send "#{rows}"
+    #res.send "#{rows}"
     #textArray = msg.message.split /\r\n|\r|\n/
   # やりたいこと
   # #, ＃から始まったらインターン生名
