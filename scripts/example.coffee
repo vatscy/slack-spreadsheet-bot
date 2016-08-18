@@ -1,16 +1,16 @@
 request = require "request"
 
 module.exports = (robot) ->
-  robot.respond /.*/i, (res) ->
+  robot.respond /./i, (res) ->
     res.send """
 
     【ルール】
-    >インターン生の苗字（「さん」「くん」は自動でカットします）
+    #インターン生の苗字（「さん」「くん」は自動でカットします）
     +または○を先頭につけると良い評価
     -または☓を先頭につけると悪い評価
 
     【例】
-    >井上くん
+    #井上くん
     +自前のカメラで撮影している
     -もっと可愛く撮って
 
@@ -23,7 +23,7 @@ module.exports = (robot) ->
     ・発言した後の編集は拾えません
     """
 
-  robot.hear /^(>|＞)/i, (res) ->
+  robot.hear /^(#|＃)/i, (res) ->
     evaluatee = null
     count = 0
     errCount = 0
@@ -33,7 +33,7 @@ module.exports = (robot) ->
     for row in rows
       if !row
         break
-      else if /^(>|＞)/i.test row
+      else if /^(#|＃)/i.test row
         evaluatee = row.substr 1
         if /(くん|さん)$/i.test evaluatee
           evaluatee = evaluatee.slice 0, -2
@@ -42,12 +42,11 @@ module.exports = (robot) ->
       if evaluatee
         options =
           uri: "https://script.google.com/macros/s/AKfycbzhrxvTo0_5-W3k7hfbdMkvhV6N9nSP4ezQg5r1WuPwq1uUpZ-k/exec"
-          form:
+          json:
             evaluatee: evaluatee
             eva: "+"
             text: "testtttt"
             evaluator: res.message.user.name
-          json: true
         request.post options, (err, response, body) ->
           return
 
