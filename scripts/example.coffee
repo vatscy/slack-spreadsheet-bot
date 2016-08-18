@@ -45,6 +45,8 @@ module.exports = (robot) ->
         break
       text = row.substr 1
 
+      res.send "#{evaluatee} #{eva} #{text}"
+
       if evaluatee
         options =
           uri: "https://script.google.com/macros/s/AKfycbzhrxvTo0_5-W3k7hfbdMkvhV6N9nSP4ezQg5r1WuPwq1uUpZ-k/exec"
