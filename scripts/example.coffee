@@ -27,7 +27,6 @@ module.exports = (robot) ->
     evaluatee = null
 
     rows = res.match["input"].split /\r\n|\r|\n/i
-    console.log rows
     for row in rows
       if !row
         break
@@ -38,9 +37,9 @@ module.exports = (robot) ->
         break
 
       eva = ""
-      if /^(+|＋|○)/i.test row
+      if /^(\+|＋|○)/i.test row
         eva = "○"
-      else if /^(-|−|☓)/i.test row
+      else if /^(\-|−|☓)/i.test row
         eva = "☓"
       else
         break
