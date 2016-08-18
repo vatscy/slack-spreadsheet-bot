@@ -46,8 +46,7 @@ module.exports = (robot) ->
           "evaluator": "#{res.message.user.name}"
         }
         """
-        robot.http("https://script.google.com/macros/s/"
-          + "AKfycbzhrxvTo0_5-W3k7hfbdMkvhV6N9nSP4ezQg5r1WuPwq1uUpZ-k/exec")
+        robot.http("https://script.google.com/macros/s/AKfycbzhrxvTo0_5-W3k7hfbdMkvhV6N9nSP4ezQg5r1WuPwq1uUpZ-k/exec")
           .header("Content-Type", "application/json")
           .post(json) (err, res, body) ->
             # do nothing
