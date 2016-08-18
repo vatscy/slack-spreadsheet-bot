@@ -1,7 +1,7 @@
 request = require "request"
 
 module.exports = (robot) ->
-  robot.respond /./i, (res) ->
+  robot.respond /.*/i, (res) ->
     res.send """
 
     【ルール】
@@ -57,7 +57,7 @@ module.exports = (robot) ->
         request.post options, (err, response, body) ->
           res.send "完了"
 
-    res.send "メモメモ..."
+    res.send "#{rows}"
     #textArray = msg.message.split /\r\n|\r|\n/
   # やりたいこと
   # #, ＃から始まったらインターン生名
