@@ -29,12 +29,12 @@ module.exports = (robot) ->
     rows = res.match["input"].split /\r\n|\r|\n/i
     for row in rows
       if !row
-        break
+        continue
       else if /^(#|＃)/i.test row
         evaluatee = row.substr 1
         if /(くん|さん)$/i.test evaluatee
           evaluatee = evaluatee.slice 0, -2
-        break
+        continue
 
       eva = ""
       if /^(\+|＋|○)/i.test row
@@ -42,10 +42,8 @@ module.exports = (robot) ->
       else if /^(\-|−|☓)/i.test row
         eva = "☓"
       else
-        break
+        continue
       text = row.substr 1
-
-      res.send "#{evaluatee} #{eva} #{text}"
 
       if evaluatee
         options =
@@ -58,7 +56,7 @@ module.exports = (robot) ->
         request.post options, (err, response, body) ->
           res.send "完了"
 
-    #res.send "#{rows}"
+    res.send "#{rows}"
     #textArray = msg.message.split /\r\n|\r|\n/
   # やりたいこと
   # #, ＃から始まったらインターン生名
