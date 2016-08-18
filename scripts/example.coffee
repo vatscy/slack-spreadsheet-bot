@@ -1,3 +1,5 @@
+request = require "request"
+
 module.exports = (robot) ->
   robot.respond /.*/i, (res) ->
     res.send """
@@ -38,18 +40,16 @@ module.exports = (robot) ->
 
       console.log evaluatee
       if evaluatee
-        json = """
-        {
-          "evaluatee": "#{evaluatee}"
-          "eva": "+"
-          "text": "test"
-          "evaluator": "#{res.message.user.name}"
-        }
-        """
-        robot.http("https://script.google.com/macros/s/AKfycbzhrxvTo0_5-W3k7hfbdMkvhV6N9nSP4ezQg5r1WuPwq1uUpZ-k/exec")
-          .header("Content-Type", "application/json")
-          .post(json) (err, res, body) ->
-            # do nothing
+        options =
+          uri: "https://script.google.com/macros/s/AKfycbzhrxvTo0_5-W3k7hfbdMkvhV6N9nSP4ezQg5r1WuPwq1uUpZ-k/exec"
+          form:
+            evaluatee: evaluatee
+            eva: "+"
+            text: "testtttt"
+            evaluator: res.message.user.name
+          json: true
+        request.post options, (err, response, body) ->
+          return
 
     res.send "メモメモ..."
     #textArray = msg.message.split /\r\n|\r|\n/
