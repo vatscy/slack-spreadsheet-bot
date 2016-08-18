@@ -25,8 +25,6 @@ module.exports = (robot) ->
 
   robot.hear /^(#|＃)/i, (res) ->
     evaluatee = null
-    count = 0
-    errCount = 0
 
     rows = res.match["input"].split /\r\n|\r|\n/i
     console.log rows
@@ -37,18 +35,27 @@ module.exports = (robot) ->
         evaluatee = row.substr 1
         if /(くん|さん)$/i.test evaluatee
           evaluatee = evaluatee.slice 0, -2
+        break
 
-      console.log evaluatee
+      eva = ""
+      if /^(+|＋|○)/i.test row
+        eva = "○"
+      else if /^(-|−|☓)/i.test row
+        eva = "☓"
+      else
+        break
+      text = row.substr 1
+
       if evaluatee
         options =
           uri: "https://script.google.com/macros/s/AKfycbzhrxvTo0_5-W3k7hfbdMkvhV6N9nSP4ezQg5r1WuPwq1uUpZ-k/exec"
           json:
             evaluatee: evaluatee
-            eva: "+"
-            text: "testtttt"
+            eva: eva
+            text: text
             evaluator: res.message.user.name
         request.post options, (err, response, body) ->
-          return
+          res.send "完了"
 
     res.send "メモメモ..."
     #textArray = msg.message.split /\r\n|\r|\n/
