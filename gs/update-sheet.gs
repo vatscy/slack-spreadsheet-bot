@@ -1,4 +1,6 @@
-function doGet(req) {}
+'use strict';
+
+function doGet() {}
 
 function doPost(req) {
   if (!req || !req.postData || !req.postData.contents) {
