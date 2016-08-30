@@ -57,10 +57,3 @@ module.exports = (robot) ->
           res.send "完了"
 
     res.send "#{rows}"
-    #textArray = msg.message.split /\r\n|\r|\n/
-  # やりたいこと
-  # #, ＃から始まったらインターン生名
-  # +, ＋, ○から始まったら良い評価
-  # -, −, ☓から始まったら悪い評価
-  # 最初にインターン生名がある
-  # 一行で来るか、複数行で来るか
