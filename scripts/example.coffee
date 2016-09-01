@@ -1,6 +1,7 @@
 request = require "request"
 
 module.exports = (robot) ->
+  # リプであれば何でもOK
   robot.respond /.*/i, (res) ->
     res.send """
 
